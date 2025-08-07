@@ -52,7 +52,7 @@ const RenderInput = ({ field, props }: { field: any; props: CustomProps }) => {
   switch (props.fieldType) {
     case FormFieldType.INPUT:
       return (
-        <div className="flex rounded-md border border-dark-500 ">
+        <div className="space-y-2 flex-1">
           {props.iconSrc && (
             <Image
               src={props.iconSrc}
@@ -66,14 +66,13 @@ const RenderInput = ({ field, props }: { field: any; props: CustomProps }) => {
             <Input
               placeholder={props.placeholder}
               {...(field as object)}
-              className="border-0"
             />
           </FormControl>
         </div>
       );
     case FormFieldType.PASSWORD:
       return (
-        <div className="flex rounded-md border border-dark-500 ">
+        <div className="space-y-2 flex-1">
           {props.iconSrc && (
             <Image
               src={props.iconSrc}
@@ -87,7 +86,6 @@ const RenderInput = ({ field, props }: { field: any; props: CustomProps }) => {
             <Input
               placeholder={props.placeholder}
               {...(field as object)}
-              className="border-0"
               type="password"
             />
           </FormControl>
@@ -121,7 +119,7 @@ const RenderInput = ({ field, props }: { field: any; props: CustomProps }) => {
     case FormFieldType.CHECKBOX:
       return (
         <FormControl>
-          <div className="flex items-center gap-4">
+          <div className="space-y-2 flex-1">
             <Checkbox
               id={props.name}
               checked={field.value}
@@ -135,7 +133,7 @@ const RenderInput = ({ field, props }: { field: any; props: CustomProps }) => {
       );
     case FormFieldType.DATE_PICKER:
       return (
-        <div className="flex rounded-md border border-dark-500 bg-dark-400">
+        <div className="space-y-2 flex-1">
           <Image
             src="/assets/icons/calendar.svg"
             height={24}
