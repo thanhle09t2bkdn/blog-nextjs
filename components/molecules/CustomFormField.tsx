@@ -125,7 +125,10 @@ const RenderInput = ({ field, props }: { field: any; props: CustomProps }) => {
               checked={field.value}
               onCheckedChange={field.onChange}
             />
-            <label htmlFor={props.name} className="checkbox-label">
+            <label
+              htmlFor={props.name}
+              className="checkbox-label ml-2 font-normal text-gray-700 text-theme-sm dark:text-gray-400"
+            >
               {props.label}
             </label>
           </div>

@@ -19,6 +19,7 @@ import { useUser } from '@/hooks/use-user';
 import { useToast } from '@/hooks/use-toast';
 import { Role } from '@/types';
 import BackHomeBreadcrumb from '@/components/organisms/breadcrumbs/BackHomeBreadcrumb';
+import Link from 'next/link';
 
 export const LoginForm = () => {
   const router = useRouter();
@@ -116,32 +117,41 @@ export const LoginForm = () => {
               iconAlt="password"
             />
 
-            <div className="flex flex-col gap-2">
-              <div className="flex items-center gap-2 cursor-pointer hover:text-blue-700">
-                <Mail className="w-4 h-4" />
-                <p
-                  className="text-sm mt-0"
-                  onClick={() => setIsForgotPassword(true)}
-                >
-                  Forgot your password?
-                </p>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <CustomFormField
+                  fieldType={FormFieldType.CHECKBOX}
+                  control={form.control}
+                  name="keepLoggedIn"
+                  label="Keep me logged in"
+                />
               </div>
-              <p className="text-sm mt-0">
-                Don&apos;t have an account?&nbsp;
-                <span
-                  className="text-blue-500 cursor-pointer hover:text-blue-700"
-                  onClick={handleSignUp}
-                >
-                  Sign Up
-                </span>
-              </p>
+              <Link
+                href="/reset-password"
+                className="text-sm text-brand-500 hover:text-brand-600 dark:text-brand-400"
+              >
+                Forgot password?
+              </Link>
             </div>
 
             <SubmitButton isLoading={isLoading} className="w-full bg-blue-700">
               Login
             </SubmitButton>
+            <div className="mt-5">
+              <p className="text-sm font-normal text-center text-gray-700 dark:text-gray-400 sm:text-start">
+                Don&apos;t have an account? {""}
+                <Link
+                  href="/signup"
+                  className="text-brand-500 hover:text-brand-600 dark:text-brand-400"
+                >
+                  Sign Up
+                </Link>
+              </p>
+            </div>
           </form>
+
         </Form>
+
       </div>
     </div>
   );

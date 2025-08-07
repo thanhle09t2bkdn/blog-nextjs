@@ -14,6 +14,7 @@ import {
 
 import { cn } from '@/lib/utils';
 import { Label } from '@/components/atoms/label';
+import { twMerge } from 'tailwind-merge';
 
 const Form = FormProvider;
 
@@ -95,7 +96,13 @@ const FormLabel = React.forwardRef<
   return (
     <Label
       ref={ref}
-      className={cn(error && 'text-destructive', className)}
+      className={twMerge(
+        // Default classes that apply by default
+        'mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400',
+
+        // User-defined className that can override the default margin
+        className,
+      )}
       htmlFor={formItemId}
       {...props}
     />
@@ -158,7 +165,7 @@ const FormMessage = React.forwardRef<
     <p
       ref={ref}
       id={formMessageId}
-      className={cn('text-sm font-medium text-destructive', className)}
+      className={cn('text-sm font-medium text-error-500', className)}
       {...props}
     >
       {body}
