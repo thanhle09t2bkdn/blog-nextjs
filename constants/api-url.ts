@@ -1,13 +1,13 @@
 export const ApiUrl = {
-  LOGIN: '/auth/login',
-  ADMIN_LOGIN: '/auth/admin/login',
-  REGISTER: '/auth/register',
-  FORGOT_PASSWORD: '/auth/forgot-password',
-  RESET_PASSWORD: '/auth/reset-password',
+  LOGIN: '/auth/email/login',
+  ADMIN_LOGIN: '/auth/email/login',
+  REGISTER: '/auth/email/register',
+  FORGOT_PASSWORD: '/auth/forgot/password',
+  RESET_PASSWORD: '/auth/reset/password',
 
   GET_CUSTOMERS: '/users',
   DELETE_CUSTOMER: '/users/{}',
-  GET_PROFILE: '/users/me',
+  GET_PROFILE: '/auth/me',
   UPDATE_PROFILE: '/users/me',
 
   GET_ADMINS: '/users',

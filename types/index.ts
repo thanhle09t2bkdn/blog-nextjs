@@ -33,8 +33,8 @@ export type MainNavItem = NavItemWithOptionalChildren;
 export type SidebarNavItem = NavItemWithChildren;
 
 export enum Role {
-  Admin = 'admin',
-  Customer = 'customer',
+  Admin = 'Admin',
+  Customer = 'Customer',
 }
 
 export enum ProductSortType {

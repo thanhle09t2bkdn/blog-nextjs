@@ -11,21 +11,18 @@ import { UserFormValidation } from '@/lib/validation';
 import CustomFormField, { FormFieldType } from './CustomFormField';
 import { Mail } from 'lucide-react';
 import SubmitButton from './SubmitButton';
-import { cn } from '@/lib/utils';
 import { ForgotPasswordForm } from './ForgotPasswordForm';
 import { useRouter } from 'next/navigation';
 import { httpRequest } from '@/lib/apis/httpRequest';
 import { ApiUrl } from '@/constants/api-url';
 import { useUser } from '@/hooks/use-user';
 import { useToast } from '@/hooks/use-toast';
-import { useCurrency } from '@/hooks/use-currency';
 import { Role } from '@/types';
-import CommonBreadcrumbs from '@/components/organisms/breadcrumbs/CommonBreadcrumbs';
+import BackHomeBreadcrumb from '@/components/organisms/breadcrumbs/BackHomeBreadcrumb';
 
 export const LoginForm = () => {
   const router = useRouter();
   const toast = useToast();
-  const { setCurrencies, setCurrency } = useCurrency();
   const { setUser, setIsLoggedIn, setAccessToken } = useUser();
   const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -48,17 +45,14 @@ export const LoginForm = () => {
       };
       const { data } = await httpRequest.post(ApiUrl.LOGIN, user);
       setIsLoggedIn(true);
-      setAccessToken(data?.result?.accessToken);
+      setAccessToken(data?.token);
 
-      const [userResponse, currenciesResponse] = await Promise.all([
+      const [userResponse] = await Promise.all([
         httpRequest.get(ApiUrl.GET_PROFILE),
-        httpRequest.get(ApiUrl.CURRENCIES),
       ]);
-      setUser(userResponse.data?.result || data?.result);
-      setCurrencies(currenciesResponse.data?.result?.data || []);
-      setCurrency(currenciesResponse.data?.result?.data[0] || []);
+      setUser(userResponse.data?.result || data?.user);
 
-      if (data?.result?.role === Role.Admin) {
+      if (data?.user?.role.name === Role.Admin) {
         router.refresh();
         const timestamp = new Date().getTime();
         router.push(`/manage/dashboard?t=${timestamp}`);
@@ -67,6 +61,7 @@ export const LoginForm = () => {
       }
       setIsLoading(false);
     } catch (error) {
+      console.error(error?.response?.data?.errors || error);
       toast.toast({
         title: 'Error',
         description: 'Invalid email or password',
@@ -87,7 +82,7 @@ export const LoginForm = () => {
   return (
     <div className="flex flex-col flex-1 lg:w-1/2 w-full">
       <div className="w-full max-w-md sm:pt-10 mx-auto mb-5">
-        <CommonBreadcrumbs page="Sign In" />
+        <BackHomeBreadcrumb />
       </div>
       <div className="flex flex-col justify-center flex-1 w-full max-w-md mx-auto">
         <div className="mb-5 sm:mb-8">
@@ -109,7 +104,6 @@ export const LoginForm = () => {
               name="email"
               label="Email"
               placeholder="user@gmail.com"
-              iconSrc="/assets/icons/email.svg"
               iconAlt="email"
             />
 
@@ -119,7 +113,6 @@ export const LoginForm = () => {
               name="password"
               label="Password"
               placeholder="******"
-              iconSrc="/assets/icons/password.svg"
               iconAlt="password"
             />
 

@@ -23,23 +23,23 @@ export const useUser = create<UserStore>((set, get) => ({
   _setHydrated: () => set({ _hydrated: true }),
   setIsLoggedIn: (isLoggedIn: boolean) =>
     set(() => ({ isLoggedIn: isLoggedIn })),
-  setUser: (user: IUser) => {
+  setUser: async (user: IUser) => {
     set(() => ({ user: user }));
     if (typeof window !== 'undefined') {
-      setCookie('user', JSON.stringify(user));
+      await setCookie('user', JSON.stringify(user));
     }
   },
-  setAccessToken: (accessToken: string) => {
+  setAccessToken: async (accessToken: string) => {
     set(() => ({ accessToken: accessToken }));
     if (typeof window !== 'undefined') {
-      setCookie('accessToken', accessToken);
+      await setCookie('accessToken', accessToken);
     }
   },
-  logout: () => {
+  logout: async () => {
     set(() => ({ isLoggedIn: false, user: null, accessToken: null }));
     if (typeof window !== 'undefined') {
-      setCookie('accessToken', '');
-      setCookie('user', '');
+      await setCookie('accessToken', '');
+      await setCookie('user', '');
     }
   },
 }));

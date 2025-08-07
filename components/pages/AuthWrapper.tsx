@@ -21,18 +21,12 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({ children }) => {
   const pathname = usePathname();
   const isHydrated = useHydration();
   const { isLoggedIn, user, setIsLoggedIn, setUser } = useUser();
-  const { currencies, setCurrencies, setCurrency } = useCurrency();
 
   useEffectOnce(() => {
     if (!isHydrated) return;
 
     const checkLoginStatus = async () => {
       try {
-        const currency = getCookie('currency');
-        if (currency && typeof currency === 'string') {
-          setCurrency(JSON.parse(currency));
-        }
-
         const isPublicPage = AppRoutes.Public.some((page) =>
           pathname.includes(page),
         );
@@ -52,13 +46,9 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({ children }) => {
           return router.push('/404');
         }
 
-        const [userResponse, currenciesResponse] = await Promise.all([
+        const [userResponse] = await Promise.all([
           httpRequest.get(ApiUrl.GET_PROFILE),
-          httpRequest.get(ApiUrl.CURRENCIES),
         ]);
-
-        setCurrencies(currenciesResponse.data?.result?.data || currencies);
-        setCurrency(currenciesResponse.data?.result?.data[0] || currencies[0]);
 
         if (userResponse.status === 200) {
           const user = userResponse.data?.result;
