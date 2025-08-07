@@ -1,25 +1,26 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
-import { Form } from "@/components/atoms/form";
-import { UserFormValidation } from "@/lib/validation";
+import { Form } from '@/components/atoms/form';
+import { UserFormValidation } from '@/lib/validation';
 
-import CustomFormField, { FormFieldType } from "./CustomFormField";
-import { Mail } from "lucide-react";
-import SubmitButton from "./SubmitButton";
-import { cn } from "@/lib/utils";
-import { ForgotPasswordForm } from "./ForgotPasswordForm";
-import { useRouter } from "next/navigation";
-import { httpRequest } from "@/lib/apis/httpRequest";
-import { ApiUrl } from "@/constants/api-url";
-import { useUser } from "@/hooks/use-user";
-import { useToast } from "@/hooks/use-toast";
-import { useCurrency } from "@/hooks/use-currency";
-import { Role } from "@/types";
+import CustomFormField, { FormFieldType } from './CustomFormField';
+import { Mail } from 'lucide-react';
+import SubmitButton from './SubmitButton';
+import { cn } from '@/lib/utils';
+import { ForgotPasswordForm } from './ForgotPasswordForm';
+import { useRouter } from 'next/navigation';
+import { httpRequest } from '@/lib/apis/httpRequest';
+import { ApiUrl } from '@/constants/api-url';
+import { useUser } from '@/hooks/use-user';
+import { useToast } from '@/hooks/use-toast';
+import { useCurrency } from '@/hooks/use-currency';
+import { Role } from '@/types';
+import CommonBreadcrumbs from '@/components/organisms/breadcrumbs/CommonBreadcrumbs';
 
 export const LoginForm = () => {
   const router = useRouter();
@@ -32,8 +33,8 @@ export const LoginForm = () => {
   const form = useForm<z.infer<typeof UserFormValidation>>({
     resolver: zodResolver(UserFormValidation),
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
   });
 
@@ -62,21 +63,21 @@ export const LoginForm = () => {
         const timestamp = new Date().getTime();
         router.push(`/manage/dashboard?t=${timestamp}`);
       } else {
-        router.push("/");
+        router.push('/');
       }
       setIsLoading(false);
     } catch (error) {
       toast.toast({
-        title: "Error",
-        description: "Invalid email or password",
-        variant: "destructive",
+        title: 'Error',
+        description: 'Invalid email or password',
+        variant: 'destructive',
       });
       setIsLoading(false);
     }
   };
 
   const handleSignUp = () => {
-    router.push("/signup");
+    router.push('/signup');
   };
 
   if (isForgotPassword) {
@@ -84,67 +85,71 @@ export const LoginForm = () => {
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex-1 space-y-6">
-        <section className="mb-3">
-          <h1
-            className={cn(
-              "text-base font-bold mb-3 border-b border-gray-200",
-              "after:content-[''] after:w-[50%] after:border-[0.5px] after:border-blue-700 after:block after:mt-2"
-            )}
-          >
+    <div className="flex flex-col flex-1 lg:w-1/2 w-full">
+      <div className="w-full max-w-md sm:pt-10 mx-auto mb-5">
+        <CommonBreadcrumbs page="Sign In" />
+      </div>
+      <div className="flex flex-col justify-center flex-1 w-full max-w-md mx-auto">
+        <div className="mb-5 sm:mb-8">
+          <h1 className="mb-2 font-semibold text-gray-800 text-title-sm dark:text-white/90 sm:text-title-md">
             Sign In
           </h1>
-          <p className="text-blue-700 text-sm mt-0">
-            Insert your account information:
-          </p>
-        </section>
-
-        <CustomFormField
-          fieldType={FormFieldType.INPUT}
-          control={form.control}
-          name="email"
-          label="Email"
-          placeholder="user@gmail.com"
-          iconSrc="/assets/icons/email.svg"
-          iconAlt="email"
-        />
-
-        <CustomFormField
-          fieldType={FormFieldType.PASSWORD}
-          control={form.control}
-          name="password"
-          label="Password"
-          placeholder="******"
-          iconSrc="/assets/icons/password.svg"
-          iconAlt="password"
-        />
-
-        <div className="flex flex-col gap-2">
-          <div className="flex items-center gap-2 cursor-pointer hover:text-blue-700">
-            <Mail className="w-4 h-4" />
-            <p
-              className="text-sm mt-0"
-              onClick={() => setIsForgotPassword(true)}
-            >
-              Forgot your password?
-            </p>
-          </div>
-          <p className="text-sm mt-0">
-            Don&apos;t have an account?&nbsp;
-            <span
-              className="text-blue-500 cursor-pointer hover:text-blue-700"
-              onClick={handleSignUp}
-            >
-              Sign Up
-            </span>
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            Enter your email and password to sign in!
           </p>
         </div>
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="flex-1 space-y-6"
+          >
+            <CustomFormField
+              fieldType={FormFieldType.INPUT}
+              control={form.control}
+              name="email"
+              label="Email"
+              placeholder="user@gmail.com"
+              iconSrc="/assets/icons/email.svg"
+              iconAlt="email"
+            />
 
-        <SubmitButton isLoading={isLoading} className="w-full bg-blue-700">
-          Login
-        </SubmitButton>
-      </form>
-    </Form>
+            <CustomFormField
+              fieldType={FormFieldType.PASSWORD}
+              control={form.control}
+              name="password"
+              label="Password"
+              placeholder="******"
+              iconSrc="/assets/icons/password.svg"
+              iconAlt="password"
+            />
+
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-2 cursor-pointer hover:text-blue-700">
+                <Mail className="w-4 h-4" />
+                <p
+                  className="text-sm mt-0"
+                  onClick={() => setIsForgotPassword(true)}
+                >
+                  Forgot your password?
+                </p>
+              </div>
+              <p className="text-sm mt-0">
+                Don&apos;t have an account?&nbsp;
+                <span
+                  className="text-blue-500 cursor-pointer hover:text-blue-700"
+                  onClick={handleSignUp}
+                >
+                  Sign Up
+                </span>
+              </p>
+            </div>
+
+            <SubmitButton isLoading={isLoading} className="w-full bg-blue-700">
+              Login
+            </SubmitButton>
+          </form>
+        </Form>
+      </div>
+    </div>
   );
 };

@@ -1,6 +1,6 @@
-import { create } from "zustand";
-import { IProduct, ICartProduct } from "@/types";
-import { setCookie, getCookie } from "cookies-next";
+import { create } from 'zustand';
+import { IProduct, ICartProduct } from '@/types';
+import { setCookie, getCookie } from 'cookies-next';
 
 interface CartStore {
   products: ICartProduct[];
@@ -12,7 +12,7 @@ interface CartStore {
 }
 
 export const useCart = create<CartStore>((set) => ({
-  products: getCookie("cart") ? JSON.parse(getCookie("cart") as string) : [],
+  products: getCookie('cart') ? JSON.parse(getCookie('cart') as string) : [],
   addProductToCart: (product: IProduct, quantity: number) => {
     set((state) => {
       const updatedProducts = [...state.products];
@@ -25,7 +25,7 @@ export const useCart = create<CartStore>((set) => ({
       } else {
         updatedProducts.push({ ...product, quantity });
       }
-      setCookie("cart", JSON.stringify(updatedProducts));
+      setCookie('cart', JSON.stringify(updatedProducts));
       return {
         products: updatedProducts,
       };
@@ -40,7 +40,7 @@ export const useCart = create<CartStore>((set) => ({
         if (updatedProducts[productIndex].quantity <= 0) {
           updatedProducts.splice(productIndex, 1);
         }
-        setCookie("cart", JSON.stringify(updatedProducts));
+        setCookie('cart', JSON.stringify(updatedProducts));
         return { products: updatedProducts };
       }
       return state;
@@ -55,7 +55,7 @@ export const useCart = create<CartStore>((set) => ({
         if (quantity <= 0) {
           updatedProducts.splice(productIndex, 1);
         }
-        setCookie("cart", JSON.stringify(updatedProducts));
+        setCookie('cart', JSON.stringify(updatedProducts));
         return { products: updatedProducts };
       }
       return state;
@@ -63,10 +63,10 @@ export const useCart = create<CartStore>((set) => ({
   },
   refreshCart: (products: ICartProduct[]) => {
     set({ products });
-    setCookie("cart", JSON.stringify(products));
+    setCookie('cart', JSON.stringify(products));
   },
   resetCart: () => {
     set({ products: [] });
-    setCookie("cart", JSON.stringify([]));
+    setCookie('cart', JSON.stringify([]));
   },
 }));

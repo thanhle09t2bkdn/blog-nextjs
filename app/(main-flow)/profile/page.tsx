@@ -1,14 +1,13 @@
-"use client";
+'use client';
 
-import { ChangePasswordModal } from "@/components/molecules/ChangePasswordModal";
-import CommonBreadcrumbs from "@/components/organisms/breadcrumbs/CommonBreadcrumbs";
-import Footer from "@/components/organisms/footer/Footer";
-import Header from "@/components/organisms/header/Header";
-import { useState } from "react";
+import { ChangePasswordModal } from '@/components/molecules/ChangePasswordModal';
+import CommonBreadcrumbs from '@/components/organisms/breadcrumbs/CommonBreadcrumbs';
+import Footer from '@/components/organisms/footer/Footer';
+import Header from '@/components/organisms/header/Header';
+import { useState } from 'react';
 
 const Profile = () => {
   const [open, setOpen] = useState(false);
-
 
   return (
     <div className="homepage bg-blue">
@@ -20,7 +19,6 @@ const Profile = () => {
           <p className="font-bold uppercase mb-10">Profile</p>
 
           <ChangePasswordModal isOpen={open} onClose={() => setOpen(false)} />
-
         </div>
       </div>
 

@@ -1,7 +1,7 @@
-import { currencyCultureCodes } from "@/constants/data";
-import { ICurrency } from "@/types";
-import { type ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { currencyCultureCodes } from '@/constants/data';
+import { ICurrency } from '@/types';
+import { type ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -16,51 +16,51 @@ export const convertFileToUrl = (file: File) => URL.createObjectURL(file);
 export const formatDateTime = (dateString: Date | string) => {
   const dateTimeOptions: Intl.DateTimeFormatOptions = {
     // weekday: "short", // abbreviated weekday name (e.g., 'Mon')
-    month: "short", // abbreviated month name (e.g., 'Oct')
-    day: "numeric", // numeric day of the month (e.g., '25')
-    year: "numeric", // numeric year (e.g., '2023')
-    hour: "numeric", // numeric hour (e.g., '8')
-    minute: "numeric", // numeric minute (e.g., '30')
+    month: 'short', // abbreviated month name (e.g., 'Oct')
+    day: 'numeric', // numeric day of the month (e.g., '25')
+    year: 'numeric', // numeric year (e.g., '2023')
+    hour: 'numeric', // numeric hour (e.g., '8')
+    minute: 'numeric', // numeric minute (e.g., '30')
     hour12: true, // use 12-hour clock (true) or 24-hour clock (false)
   };
 
   const dateDayOptions: Intl.DateTimeFormatOptions = {
-    weekday: "short", // abbreviated weekday name (e.g., 'Mon')
-    year: "numeric", // numeric year (e.g., '2023')
-    month: "2-digit", // abbreviated month name (e.g., 'Oct')
-    day: "2-digit", // numeric day of the month (e.g., '25')
+    weekday: 'short', // abbreviated weekday name (e.g., 'Mon')
+    year: 'numeric', // numeric year (e.g., '2023')
+    month: '2-digit', // abbreviated month name (e.g., 'Oct')
+    day: '2-digit', // numeric day of the month (e.g., '25')
   };
 
   const dateOptions: Intl.DateTimeFormatOptions = {
-    month: "short", // abbreviated month name (e.g., 'Oct')
-    year: "numeric", // numeric year (e.g., '2023')
-    day: "numeric", // numeric day of the month (e.g., '25')
+    month: 'short', // abbreviated month name (e.g., 'Oct')
+    year: 'numeric', // numeric year (e.g., '2023')
+    day: 'numeric', // numeric day of the month (e.g., '25')
   };
 
   const timeOptions: Intl.DateTimeFormatOptions = {
-    hour: "numeric", // numeric hour (e.g., '8')
-    minute: "numeric", // numeric minute (e.g., '30')
+    hour: 'numeric', // numeric hour (e.g., '8')
+    minute: 'numeric', // numeric minute (e.g., '30')
     hour12: true, // use 12-hour clock (true) or 24-hour clock (false)
   };
 
   const formattedDateTime: string = new Date(dateString).toLocaleString(
-    "en-US",
-    dateTimeOptions
+    'en-US',
+    dateTimeOptions,
   );
 
   const formattedDateDay: string = new Date(dateString).toLocaleString(
-    "en-US",
-    dateDayOptions
+    'en-US',
+    dateDayOptions,
   );
 
   const formattedDate: string = new Date(dateString).toLocaleString(
-    "en-US",
-    dateOptions
+    'en-US',
+    dateOptions,
   );
 
   const formattedTime: string = new Date(dateString).toLocaleString(
-    "en-US",
-    timeOptions
+    'en-US',
+    timeOptions,
   );
 
   return {
@@ -82,7 +82,7 @@ export function decryptKey(passkey: string) {
 export const insertStringVariables = (text: string, ...args: string[]) => {
   let str = text;
   for (const arg of args) {
-    str = str.replace("{}", arg);
+    str = str.replace('{}', arg);
   }
   return str;
 };
@@ -101,8 +101,8 @@ export const insertStringVariables = (text: string, ...args: string[]) => {
 // };
 
 export const formatCurrency = (amount: number, currency: string) => {
-  return amount.toLocaleString(currencyCultureCodes[currency] || "de-DE", {
-    style: "currency",
+  return amount.toLocaleString(currencyCultureCodes[currency] || 'de-DE', {
+    style: 'currency',
     currency,
   });
 };
@@ -115,12 +115,12 @@ export const getLastPrice = (price: number, currency: ICurrency) => {
 export function addCurrentTimeToDate(date: Date) {
   const currentDate = new Date(date); // Create a Date object from the input date
   const now = new Date(); // Get the current date and time
-  
+
   // Extract hours and minutes from the current time
   const hours = now.getHours();
   const minutes = now.getMinutes();
   const seconds = now.getSeconds();
-  
+
   // Set the hours and minutes of the input date to match the current time
   currentDate.setHours(hours);
   currentDate.setMinutes(minutes);

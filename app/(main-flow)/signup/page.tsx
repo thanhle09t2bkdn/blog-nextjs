@@ -1,5 +1,5 @@
-import { SignupForm } from "@/components/molecules/SignupForm";
-import CommonBreadcrumbs from "@/components/organisms/breadcrumbs/CommonBreadcrumbs";
+import { SignupForm } from '@/components/molecules/SignupForm';
+import CommonBreadcrumbs from '@/components/organisms/breadcrumbs/CommonBreadcrumbs';
 
 const Signup = () => {
   return (

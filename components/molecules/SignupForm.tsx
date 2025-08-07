@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
-import { Form } from "@/components/atoms/form";
-import { SignupFormValidation } from "@/lib/validation";
+import { Form } from '@/components/atoms/form';
+import { SignupFormValidation } from '@/lib/validation';
 
-import CustomFormField, { FormFieldType } from "./CustomFormField";
-import SubmitButton from "./SubmitButton";
-import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
-import { httpRequest } from "@/lib/apis/httpRequest";
-import { ApiUrl } from "@/constants/api-url";
-import { toast } from "@/hooks/use-toast";
+import CustomFormField, { FormFieldType } from './CustomFormField';
+import SubmitButton from './SubmitButton';
+import { cn } from '@/lib/utils';
+import { useRouter } from 'next/navigation';
+import { httpRequest } from '@/lib/apis/httpRequest';
+import { ApiUrl } from '@/constants/api-url';
+import { toast } from '@/hooks/use-toast';
 
 export const SignupForm = () => {
   const router = useRouter();
@@ -23,17 +23,17 @@ export const SignupForm = () => {
   const form = useForm<z.infer<typeof SignupFormValidation>>({
     resolver: zodResolver(SignupFormValidation),
     defaultValues: {
-      email: "",
-      password: "",
-      companyName: "",
-      address: "",
-      city: "",
-      state: "",
-      zip: "",
-      country: "",
-      phone: "",
-      contactPerson: "",
-      contactEmail: "",
+      email: '',
+      password: '',
+      companyName: '',
+      address: '',
+      city: '',
+      state: '',
+      zip: '',
+      country: '',
+      phone: '',
+      contactPerson: '',
+      contactEmail: '',
     },
   });
 
@@ -56,18 +56,18 @@ export const SignupForm = () => {
       };
       const newCustomer = await httpRequest.post(ApiUrl.REGISTER, customer);
       if (newCustomer) {
-        router.push("/login");
+        router.push('/login');
       }
       toast({
-        title: "Success",
-        description: "Account created successfully",
-        variant: "default",
+        title: 'Success',
+        description: 'Account created successfully',
+        variant: 'default',
       });
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Something went wrong",
-        variant: "destructive",
+        title: 'Error',
+        description: 'Something went wrong',
+        variant: 'destructive',
       });
     }
 
@@ -75,7 +75,7 @@ export const SignupForm = () => {
   };
 
   const handleLogin = () => {
-    router.push("/login");
+    router.push('/login');
   };
 
   return (
@@ -84,8 +84,8 @@ export const SignupForm = () => {
         <section className="mb-3">
           <h1
             className={cn(
-              "text-base font-bold mb-3 border-b border-gray-200",
-              "after:content-[''] after:w-[50%] after:border-[0.5px] after:border-blue-700 after:block after:mt-2"
+              'text-base font-bold mb-3 border-b border-gray-200',
+              "after:content-[''] after:w-[50%] after:border-[0.5px] after:border-blue-700 after:block after:mt-2",
             )}
           >
             Create an account

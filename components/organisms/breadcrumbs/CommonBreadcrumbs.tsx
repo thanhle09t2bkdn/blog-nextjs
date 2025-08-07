@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { ChevronRight } from "lucide-react";
+import { ChevronRight } from 'lucide-react';
 
 type Props = {
   page: string;

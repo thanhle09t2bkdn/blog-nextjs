@@ -1,6 +1,6 @@
-import { httpRequest } from "@/lib/apis/httpRequest";
-import { ApiUrl } from "@/constants/api-url";
-import { IProduct } from "@/types";
+import { httpRequest } from '@/lib/apis/httpRequest';
+import { ApiUrl } from '@/constants/api-url';
+import { IProduct } from '@/types';
 
 export const getProductsByIds = async (productIds: number[]) => {
   if (productIds.length === 0) return [];

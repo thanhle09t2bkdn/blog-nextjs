@@ -1,4 +1,4 @@
-"use server";
+'use server';
 
 //  GET RECENT APPOINTMENTS
 export const getRecentAppointmentList = async () => {
@@ -6,8 +6,8 @@ export const getRecentAppointmentList = async () => {
     return true;
   } catch (error) {
     console.error(
-      "An error occurred while retrieving the recent appointments:",
-      error
+      'An error occurred while retrieving the recent appointments:',
+      error,
     );
   }
 };

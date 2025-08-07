@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import {
   ColumnDef,
   PaginationState,
@@ -7,18 +7,18 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   useReactTable,
-} from "@tanstack/react-table";
-import React, { useEffect, useState } from "react";
+} from '@tanstack/react-table';
+import React, { useEffect, useState } from 'react';
 
-import { Button } from "@/components/atoms/button";
-import { Input } from "@/components/atoms/input";
+import { Button } from '@/components/atoms/button';
+import { Input } from '@/components/atoms/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/atoms/select";
+} from '@/components/atoms/select';
 import {
   Table,
   TableBody,
@@ -26,16 +26,16 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/atoms/table";
+} from '@/components/atoms/table';
 
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
   ChevronsLeft,
   ChevronsRight,
-} from "lucide-react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { ScrollArea, ScrollBar } from "@/components/atoms/scroll-area";
+} from 'lucide-react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { ScrollArea, ScrollBar } from '@/components/atoms/scroll-area';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -63,15 +63,15 @@ export function ProductTable<TData, TValue>({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   // Search params
-  const page = searchParams?.get("page") ?? "1";
+  const page = searchParams?.get('page') ?? '1';
   const pageAsNumber = Number(page);
   const fallbackPage =
     isNaN(pageAsNumber) || pageAsNumber < 1 ? 1 : pageAsNumber;
-  const per_page = searchParams?.get("perPage") ?? "10";
+  const per_page = searchParams?.get('perPage') ?? '10';
   const perPageAsNumber = Number(per_page);
   const fallbackPerPage = isNaN(perPageAsNumber) ? 10 : perPageAsNumber;
 
-  const [searchValue, setSearchValue] = React.useState<string>("");
+  const [searchValue, setSearchValue] = React.useState<string>('');
 
   const createQueryString = React.useCallback(
     (params: Record<string, string | number | null>) => {
@@ -86,7 +86,7 @@ export function ProductTable<TData, TValue>({
       }
       return newSearchParams.toString();
     },
-    [searchParams]
+    [searchParams],
   );
 
   const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
@@ -102,7 +102,7 @@ export function ProductTable<TData, TValue>({
       })}`,
       {
         scroll: false,
-      }
+      },
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageIndex, pageSize]);
@@ -132,7 +132,7 @@ export function ProductTable<TData, TValue>({
         })}`,
         {
           scroll: false,
-        }
+        },
       );
     }
     if (searchValue?.length === 0 || searchValue === undefined) {
@@ -144,7 +144,7 @@ export function ProductTable<TData, TValue>({
         })}`,
         {
           scroll: false,
-        }
+        },
       );
     }
 
@@ -175,7 +175,7 @@ export function ProductTable<TData, TValue>({
     <>
       <Input
         placeholder={`Search ${searchKey}...`}
-        value={searchValue ?? ""}
+        value={searchValue ?? ''}
         onChange={handleSearch}
         className="w-full md:max-w-sm"
       />
@@ -191,7 +191,7 @@ export function ProductTable<TData, TValue>({
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
-                            header.getContext()
+                            header.getContext(),
                           )}
                     </TableHead>
                   );
@@ -204,13 +204,13 @@ export function ProductTable<TData, TValue>({
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
+                  data-state={row.getIsSelected() && 'selected'}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext()
+                        cell.getContext(),
                       )}
                     </TableCell>
                   ))}
@@ -234,7 +234,7 @@ export function ProductTable<TData, TValue>({
       <div className="flex flex-col items-center justify-end gap-2 space-x-2 py-4 sm:flex-row">
         <div className="flex w-full items-center justify-between">
           <div className="flex-1 text-sm text-muted-foreground">
-            {table.getFilteredSelectedRowModel().rows.length} of{" "}
+            {table.getFilteredSelectedRowModel().rows.length} of{' '}
             {table.getFilteredRowModel().rows.length} row(s) selected.
           </div>
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-6 lg:gap-8">
@@ -266,7 +266,7 @@ export function ProductTable<TData, TValue>({
         </div>
         <div className="flex w-full items-center justify-between gap-2 sm:justify-end">
           <div className="flex w-[100px] items-center justify-center text-sm font-medium">
-            Page {table.getState().pagination.pageIndex + 1} of{" "}
+            Page {table.getState().pagination.pageIndex + 1} of{' '}
             {table.getPageCount()}
           </div>
           <div className="flex items-center space-x-2">

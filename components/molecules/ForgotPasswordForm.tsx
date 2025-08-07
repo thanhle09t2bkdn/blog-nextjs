@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
-import { Form } from "@/components/atoms/form";
-import { ForgotPasswordFormValidation } from "@/lib/validation";
+import { Form } from '@/components/atoms/form';
+import { ForgotPasswordFormValidation } from '@/lib/validation';
 
-import CustomFormField, { FormFieldType } from "./CustomFormField";
-import SubmitButton from "./SubmitButton";
-import { cn } from "@/lib/utils";
-import { Button } from "../atoms/button";
-import { httpRequest } from "@/lib/apis/httpRequest";
-import { ApiUrl } from "@/constants/api-url";
-import { toast } from "@/hooks/use-toast";
+import CustomFormField, { FormFieldType } from './CustomFormField';
+import SubmitButton from './SubmitButton';
+import { cn } from '@/lib/utils';
+import { Button } from '../atoms/button';
+import { httpRequest } from '@/lib/apis/httpRequest';
+import { ApiUrl } from '@/constants/api-url';
+import { toast } from '@/hooks/use-toast';
 
 type Props = {
   setIsForgotPassword: (value: boolean) => void;
@@ -26,12 +26,12 @@ export const ForgotPasswordForm = ({ setIsForgotPassword }: Props) => {
   const form = useForm<z.infer<typeof ForgotPasswordFormValidation>>({
     resolver: zodResolver(ForgotPasswordFormValidation),
     defaultValues: {
-      email: "",
+      email: '',
     },
   });
 
   const onSubmit = async (
-    values: z.infer<typeof ForgotPasswordFormValidation>
+    values: z.infer<typeof ForgotPasswordFormValidation>,
   ) => {
     setIsLoading(true);
 
@@ -41,21 +41,21 @@ export const ForgotPasswordForm = ({ setIsForgotPassword }: Props) => {
       });
       if (data.result) {
         toast({
-          title: "Email sent",
-          description: "We have sent you an email to reset your password.",
+          title: 'Email sent',
+          description: 'We have sent you an email to reset your password.',
         });
       } else {
         toast({
-          variant: "destructive",
-          title: "Error",
-          description: "Something went wrong. Please try again.",
+          variant: 'destructive',
+          title: 'Error',
+          description: 'Something went wrong. Please try again.',
         });
       }
     } catch (error) {
       toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Something went wrong. Please try again.",
+        variant: 'destructive',
+        title: 'Error',
+        description: 'Something went wrong. Please try again.',
       });
     } finally {
       setIsLoading(false);
@@ -68,8 +68,8 @@ export const ForgotPasswordForm = ({ setIsForgotPassword }: Props) => {
         <section className="mb-3">
           <h1
             className={cn(
-              "text-base font-bold mb-3 border-b border-gray-200",
-              "after:content-[''] after:w-[50%] after:border-[0.5px] after:border-blue-700 after:block after:mt-2"
+              'text-base font-bold mb-3 border-b border-gray-200',
+              "after:content-[''] after:w-[50%] after:border-[0.5px] after:border-blue-700 after:block after:mt-2",
             )}
           >
             Reset your password

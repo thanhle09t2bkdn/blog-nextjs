@@ -1,20 +1,20 @@
-"use client";
-import { useEffect, useState } from "react";
-import { Button } from "@/components/atoms/button";
-import { Modal } from "@/components/atoms/modal";
-import { Form } from "@/components/atoms/form";
-import { ChangePasswordFormValidation } from "@/lib/validation";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { httpRequest } from "@/lib/apis/httpRequest";
-import { ApiUrl } from "@/constants/api-url";
-import { toast } from "@/hooks/use-toast";
+'use client';
+import { useEffect, useState } from 'react';
+import { Button } from '@/components/atoms/button';
+import { Modal } from '@/components/atoms/modal';
+import { Form } from '@/components/atoms/form';
+import { ChangePasswordFormValidation } from '@/lib/validation';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { httpRequest } from '@/lib/apis/httpRequest';
+import { ApiUrl } from '@/constants/api-url';
+import { toast } from '@/hooks/use-toast';
 import CustomFormField, {
   FormFieldType,
-} from "@/components/molecules/CustomFormField";
-import SubmitButton from "@/components/molecules/SubmitButton";
-import { EyeIcon, EyeOffIcon } from "lucide-react";
+} from '@/components/molecules/CustomFormField';
+import SubmitButton from '@/components/molecules/SubmitButton';
+import { EyeIcon, EyeOffIcon } from 'lucide-react';
 
 interface AlertModalProps {
   isOpen: boolean;
@@ -26,8 +26,8 @@ interface AlertModalProps {
 export const ChangePasswordModal: React.FC<AlertModalProps> = ({
   isOpen,
   onClose,
-  title = "Change Password",
-  description = "Please enter your new password.",
+  title = 'Change Password',
+  description = 'Please enter your new password.',
 }) => {
   const [isMounted, setIsMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -38,13 +38,13 @@ export const ChangePasswordModal: React.FC<AlertModalProps> = ({
   const form = useForm<z.infer<typeof ChangePasswordFormValidation>>({
     resolver: zodResolver(ChangePasswordFormValidation),
     defaultValues: {
-      currentPassword: "",
-      newPassword: "",
+      currentPassword: '',
+      newPassword: '',
     },
   });
 
   const onSubmit = async (
-    values: z.infer<typeof ChangePasswordFormValidation>
+    values: z.infer<typeof ChangePasswordFormValidation>,
   ) => {
     setIsLoading(true);
     try {
@@ -53,16 +53,16 @@ export const ChangePasswordModal: React.FC<AlertModalProps> = ({
         newPassword: values.newPassword,
       });
       toast({
-        title: "Password changed",
-        description: "Your password has been changed.",
+        title: 'Password changed',
+        description: 'Your password has been changed.',
       });
     } catch (error) {
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description:
           error.response?.data?.error ||
-          "Something went wrong. Please try again.",
+          'Something went wrong. Please try again.',
       });
     } finally {
       setIsLoading(false);

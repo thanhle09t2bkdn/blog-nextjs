@@ -5,9 +5,9 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/atoms/breadcrumb";
-import { Slash } from "lucide-react";
-import { Fragment } from "react";
+} from '@/components/atoms/breadcrumb';
+import { Slash } from 'lucide-react';
+import { Fragment } from 'react';
 
 type BreadcrumbItemProps = {
   title: string;

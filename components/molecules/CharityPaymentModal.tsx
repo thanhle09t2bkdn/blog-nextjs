@@ -1,8 +1,8 @@
-"use client";
-import { useEffect, useState } from "react";
-import { Button } from "@/components/atoms/button";
-import { Modal } from "@/components/atoms/modal";
-import { Calendar } from "@/components/atoms/calendar";
+'use client';
+import { useEffect, useState } from 'react';
+import { Button } from '@/components/atoms/button';
+import { Modal } from '@/components/atoms/modal';
+import { Calendar } from '@/components/atoms/calendar';
 
 interface CharityPaymentModalProps {
   isOpen: boolean;
@@ -18,8 +18,8 @@ export const CharityPaymentModal: React.FC<CharityPaymentModalProps> = ({
   onClose,
   onConfirm,
   loading,
-  title = "Send Charity Payment",
-  description = "Please choose a date to send the payment.",
+  title = 'Send Charity Payment',
+  description = 'Please choose a date to send the payment.',
 }) => {
   const [isMounted, setIsMounted] = useState(false);
   const [date, setDate] = useState<Date | undefined>(new Date());

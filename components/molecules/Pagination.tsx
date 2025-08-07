@@ -1,6 +1,6 @@
-import { Button } from "@/components/atoms/button";
-import { cn } from "@/lib/utils";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from '@/components/atoms/button';
+import { cn } from '@/lib/utils';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 type PaginationProps = {
   page: number;
@@ -20,8 +20,8 @@ const Pagination = ({ page, totalPages, onPageChange }: PaginationProps) => {
       </Button>
       <Button
         className={cn(
-          "rounded-md text-sm py-0 border border-gray-200 px-2 h-8 w-8 hover:bg-gray-10",
-          "bg-blue-700 text-white"
+          'rounded-md text-sm py-0 border border-gray-200 px-2 h-8 w-8 hover:bg-gray-10',
+          'bg-blue-700 text-white',
         )}
       >
         {page}

@@ -1,7 +1,7 @@
-"use server";
+'use server';
 
-import { cookies } from "next/headers";
-import { getCookie } from "cookies-next";
+import { cookies } from 'next/headers';
+import { getCookie } from 'cookies-next';
 
 /**
  * Get the authorization token from the cookies.
@@ -10,6 +10,6 @@ import { getCookie } from "cookies-next";
  */
 export async function getAuthorization(): Promise<string> {
   const cookieStore = cookies();
-  const accessToken = cookieStore.get("accessToken")?.value;
-  return accessToken || getCookie("accessToken");
+  const accessToken = cookieStore.get('accessToken')?.value;
+  return accessToken || getCookie('accessToken');
 }

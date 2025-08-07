@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/atoms/avatar";
-import { Button } from "@/components/atoms/button";
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/atoms/avatar';
+import { Button } from '@/components/atoms/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,10 +12,10 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/atoms/dropdown-menu";
-import { ChangePasswordModal } from "@/components/molecules/ChangePasswordModal";
-import { useUser } from "@/hooks/use-user";
-import { useIsClient } from "@/hooks/use-is-client";
+} from '@/components/atoms/dropdown-menu';
+import { ChangePasswordModal } from '@/components/molecules/ChangePasswordModal';
+import { useUser } from '@/hooks/use-user';
+import { useIsClient } from '@/hooks/use-is-client';
 
 export function UserNav() {
   const router = useRouter();
@@ -25,7 +25,7 @@ export function UserNav() {
 
   const handleLogout = () => {
     logout();
-    router.push("/");
+    router.push('/');
   };
 
   return !isClient ? (
@@ -37,7 +37,7 @@ export function UserNav() {
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="relative h-8 w-8 rounded-full">
             <Avatar className="h-8 w-8">
-              <AvatarImage src={""} alt={""} />
+              <AvatarImage src={''} alt={''} />
               <AvatarFallback className="uppercase bg-blue-500">
                 {user?.email?.charAt(0)}
               </AvatarFallback>
@@ -48,7 +48,7 @@ export function UserNav() {
           <DropdownMenuLabel className="font-normal">
             <div className="flex flex-col space-y-1">
               <p className="text-sm font-medium leading-none">
-                {user?.email?.split("@")[0]}
+                {user?.email?.split('@')[0]}
               </p>
               <p className="text-xs leading-none text-muted-foreground">
                 {user?.email}

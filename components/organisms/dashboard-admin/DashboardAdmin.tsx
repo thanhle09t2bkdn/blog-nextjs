@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "@/components/atoms/card";
-import { Tabs, TabsContent } from "@/components/atoms/tabs";
-import { ApiUrl } from "@/constants/api-url";
-import { useEffectOnce } from "@/hooks/use-effect-once";
-import { httpRequest } from "@/lib/apis/httpRequest";
-import { formatCurrency } from "@/lib/utils";
-import { IStatistics } from "@/types";
-import { CreditCard, ListOrdered, ScanBarcode, User } from "lucide-react";
-import { useState } from "react";
+} from '@/components/atoms/card';
+import { Tabs, TabsContent } from '@/components/atoms/tabs';
+import { ApiUrl } from '@/constants/api-url';
+import { useEffectOnce } from '@/hooks/use-effect-once';
+import { httpRequest } from '@/lib/apis/httpRequest';
+import { formatCurrency } from '@/lib/utils';
+import { IStatistics } from '@/types';
+import { CreditCard, ListOrdered, ScanBarcode, User } from 'lucide-react';
+import { useState } from 'react';
 
 const DashboardAdmin = () => {
   const [statistics, setStatistics] = useState<IStatistics>();
@@ -72,7 +72,7 @@ const DashboardAdmin = () => {
             <CardContent>
               {statistics && (
                 <div className="text-2xl font-bold">
-                  {formatCurrency(statistics.totalPaidPayments || 0, "EUR")}
+                  {formatCurrency(statistics.totalPaidPayments || 0, 'EUR')}
                 </div>
               )}
             </CardContent>

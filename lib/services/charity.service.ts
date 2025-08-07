@@ -1,5 +1,5 @@
-import { ApiUrl } from "@/constants/api-url";
-import { httpRequest } from "@/lib/apis/httpRequest";
+import { ApiUrl } from '@/constants/api-url';
+import { httpRequest } from '@/lib/apis/httpRequest';
 
 export const getCharities = async () => {
   const { data } = await httpRequest.get(ApiUrl.CHARITIES, {

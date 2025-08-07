@@ -1,10 +1,10 @@
-"use client";
-import { ColumnDef } from "@tanstack/react-table";
-import { CellAction } from "./cell-action";
-import { IProduct } from "@/types";
-import Image from "next/image";
-import { formatCurrency } from "@/lib/utils";
-import { CheckIcon, XIcon } from "lucide-react";
+'use client';
+import { ColumnDef } from '@tanstack/react-table';
+import { CellAction } from './cell-action';
+import { IProduct } from '@/types';
+import Image from 'next/image';
+import { formatCurrency } from '@/lib/utils';
+import { CheckIcon, XIcon } from 'lucide-react';
 
 export const columns: ColumnDef<IProduct>[] = [
   // {
@@ -27,17 +27,17 @@ export const columns: ColumnDef<IProduct>[] = [
   //   enableHiding: false,
   // },
   {
-    accessorKey: "id",
-    header: "ID",
+    accessorKey: 'id',
+    header: 'ID',
   },
   {
-    accessorKey: "name",
-    header: "NAME",
+    accessorKey: 'name',
+    header: 'NAME',
     cell: ({ row }) => <p className="min-w-[100px]">{row.original.name}</p>,
   },
   {
-    id: "picture",
-    header: "PICTURE",
+    id: 'picture',
+    header: 'PICTURE',
     cell: ({ row }) => (
       <Image
         src={row.original.picture}
@@ -49,28 +49,28 @@ export const columns: ColumnDef<IProduct>[] = [
     ),
   },
   {
-    accessorKey: "description",
-    header: "DESCRIPTION",
+    accessorKey: 'description',
+    header: 'DESCRIPTION',
     cell: ({ row }) => (
       <p className="min-w-[100px] line-clamp-1">{row.original.description}</p>
     ),
   },
   {
-    accessorKey: "barcode",
-    header: "BARCODE",
+    accessorKey: 'barcode',
+    header: 'BARCODE',
   },
   {
-    accessorKey: "price",
-    header: "PRICE",
+    accessorKey: 'price',
+    header: 'PRICE',
     cell: ({ row }) => (
       <span className="min-w-[120px]">
-        {formatCurrency(row.original.price, "EUR")}
+        {formatCurrency(row.original.price, 'EUR')}
       </span>
     ),
   },
   {
-    accessorKey: "stopSale",
-    header: "ON SALE",
+    accessorKey: 'stopSale',
+    header: 'ON SALE',
     cell: ({ row }) => (
       <span className="min-w-[120px]">
         {!row.original.stopSale ? (
@@ -82,7 +82,7 @@ export const columns: ColumnDef<IProduct>[] = [
     ),
   },
   {
-    id: "actions",
+    id: 'actions',
     cell: ({ row }) => <CellAction data={row.original} />,
   },
 ];

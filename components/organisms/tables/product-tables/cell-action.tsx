@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import { AlertModal } from "@/components/molecules/AlertModal";
-import { Button } from "@/components/atoms/button";
+import { AlertModal } from '@/components/molecules/AlertModal';
+import { Button } from '@/components/atoms/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "@/components/atoms/dropdown-menu";
-import { Edit, MoreHorizontal, Trash } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { toast } from "@/hooks/use-toast";
-import { httpRequest } from "@/lib/apis/httpRequest";
-import { ApiUrl } from "@/constants/api-url";
-import { insertStringVariables } from "@/lib/utils";
-import { IProduct } from "@/types";
+} from '@/components/atoms/dropdown-menu';
+import { Edit, MoreHorizontal, Trash } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { toast } from '@/hooks/use-toast';
+import { httpRequest } from '@/lib/apis/httpRequest';
+import { ApiUrl } from '@/constants/api-url';
+import { insertStringVariables } from '@/lib/utils';
+import { IProduct } from '@/types';
 
 interface CellActionProps {
   data: IProduct;
@@ -31,17 +31,17 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
     setLoading(true);
     try {
       await httpRequest.delete(
-        insertStringVariables(ApiUrl.DELETE_PRODUCT, data.id.toString())
+        insertStringVariables(ApiUrl.DELETE_PRODUCT, data.id.toString()),
       );
       toast({
-        title: "Product deleted successfully",
-        variant: "default",
+        title: 'Product deleted successfully',
+        variant: 'default',
       });
       router.refresh();
     } catch (error) {
       toast({
-        title: error.response?.data?.error || "Something went wrong",
-        variant: "destructive",
+        title: error.response?.data?.error || 'Something went wrong',
+        variant: 'destructive',
       });
       setLoading(false);
     }

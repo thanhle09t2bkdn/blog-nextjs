@@ -1,8 +1,9 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import Image from 'next/image';
+import { usePathname, useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useIsClient } from '@/hooks/use-is-client';
 
 import {
   AlertDialog,
@@ -12,25 +13,25 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/atoms/alert-dialog";
+} from '@/components/atoms/alert-dialog';
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
-} from "@/components/atoms/input-otp";
-import { decryptKey, encryptKey } from "@/lib/utils";
+} from '@/components/atoms/input-otp';
+import { decryptKey, encryptKey } from '@/lib/utils';
 
 export const PasskeyModal = () => {
   const router = useRouter();
   const path = usePathname();
+  const isClient = useIsClient();
   const [open, setOpen] = useState(false);
-  const [passkey, setPasskey] = useState("");
-  const [error, setError] = useState("");
+  const [passkey, setPasskey] = useState('');
+  const [error, setError] = useState('');
 
-  const encryptedKey =
-    typeof window !== "undefined"
-      ? window.localStorage.getItem("accessKey")
-      : null;
+  const encryptedKey = isClient
+    ? window.localStorage.getItem('accessKey')
+    : null;
 
   useEffect(() => {
     const accessKey = encryptedKey && decryptKey(encryptedKey);
@@ -38,7 +39,7 @@ export const PasskeyModal = () => {
     if (path)
       if (accessKey === process.env.NEXT_PUBLIC_ADMIN_PASSKEY!.toString()) {
         setOpen(false);
-        router.push("/manage");
+        router.push('/manage');
       } else {
         setOpen(true);
       }
@@ -47,22 +48,22 @@ export const PasskeyModal = () => {
 
   const closeModal = () => {
     setOpen(false);
-    router.push("/");
+    router.push('/');
   };
 
   const validatePasskey = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     e.preventDefault();
 
     if (passkey === process.env.NEXT_PUBLIC_ADMIN_PASSKEY) {
       const encryptedKey = encryptKey(passkey);
 
-      localStorage.setItem("accessKey", encryptedKey);
+      localStorage.setItem('accessKey', encryptedKey);
 
       setOpen(false);
     } else {
-      setError("Invalid passkey. Please try again.");
+      setError('Invalid passkey. Please try again.');
     }
   };
 

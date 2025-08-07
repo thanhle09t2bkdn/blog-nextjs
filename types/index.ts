@@ -1,5 +1,5 @@
-import { Icons } from "@/components/icons";
-import { OrderStatus, PaymentStatus } from "@/constants";
+import { Icons } from '@/components/icons';
+import { OrderStatus, PaymentStatus } from '@/constants';
 
 export interface NavItem {
   title: string;
@@ -33,14 +33,14 @@ export type MainNavItem = NavItemWithOptionalChildren;
 export type SidebarNavItem = NavItemWithChildren;
 
 export enum Role {
-  Admin = "admin",
-  Customer = "customer",
+  Admin = 'admin',
+  Customer = 'customer',
 }
 
 export enum ProductSortType {
-  Empty = "empty",
-  PriceAsc = "price_asc",
-  PriceDesc = "price_desc",
+  Empty = 'empty',
+  PriceAsc = 'price_asc',
+  PriceDesc = 'price_desc',
 }
 
 export interface IUser {

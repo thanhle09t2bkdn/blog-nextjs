@@ -1,37 +1,37 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-unused-vars */
 // import { E164Number } from "libphonenumber-js/core";
-import Image from "next/image";
-import ReactDatePicker from "react-datepicker";
-import { Control } from "react-hook-form";
+import Image from 'next/image';
+import ReactDatePicker from 'react-datepicker';
+import { Control } from 'react-hook-form';
 // import PhoneInput from "react-phone-number-input";
 
-import { Checkbox } from "@/components/atoms/checkbox";
+import { Checkbox } from '@/components/atoms/checkbox';
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/atoms/form";
-import { Input } from "@/components/atoms/input";
+} from '@/components/atoms/form';
+import { Input } from '@/components/atoms/input';
 import {
   Select,
   SelectContent,
   SelectTrigger,
   SelectValue,
-} from "@/components/atoms/select";
-import { Textarea } from "@/components/atoms/textarea";
+} from '@/components/atoms/select';
+import { Textarea } from '@/components/atoms/textarea';
 
 export enum FormFieldType {
-  INPUT = "input",
-  TEXTAREA = "textarea",
-  PHONE_INPUT = "phoneInput",
-  CHECKBOX = "checkbox",
-  DATE_PICKER = "datePicker",
-  SELECT = "select",
-  SKELETON = "skeleton",
-  PASSWORD = "password",
+  INPUT = 'input',
+  TEXTAREA = 'textarea',
+  PHONE_INPUT = 'phoneInput',
+  CHECKBOX = 'checkbox',
+  DATE_PICKER = 'datePicker',
+  SELECT = 'select',
+  SKELETON = 'skeleton',
+  PASSWORD = 'password',
 }
 interface CustomProps {
   control: Control<any>;
@@ -58,7 +58,7 @@ const RenderInput = ({ field, props }: { field: any; props: CustomProps }) => {
               src={props.iconSrc}
               height={24}
               width={24}
-              alt={props.iconAlt || "icon"}
+              alt={props.iconAlt || 'icon'}
               className="ml-2"
             />
           )}
@@ -79,7 +79,7 @@ const RenderInput = ({ field, props }: { field: any; props: CustomProps }) => {
               src={props.iconSrc}
               height={24}
               width={24}
-              alt={props.iconAlt || "icon"}
+              alt={props.iconAlt || 'icon'}
               className="ml-2"
             />
           )}
@@ -149,7 +149,7 @@ const RenderInput = ({ field, props }: { field: any; props: CustomProps }) => {
               selected={field.value}
               onChange={(date: Date | null) => field.onChange(date)}
               timeInputLabel="Time:"
-              dateFormat={props.dateFormat ?? "MM/dd/yyyy"}
+              dateFormat={props.dateFormat ?? 'MM/dd/yyyy'}
               wrapperClassName="date-picker"
             />
           </FormControl>

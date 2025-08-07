@@ -1,10 +1,10 @@
-import PageContainer from "@/components/templates/admin/page-container";
-import type { Metadata } from "next";
-import DashboardAdmin from "@/components/organisms/dashboard-admin/DashboardAdmin";
+import PageContainer from '@/components/templates/admin/page-container';
+import type { Metadata } from 'next';
+import DashboardAdmin from '@/components/organisms/dashboard-admin/DashboardAdmin';
 
 export const metadata: Metadata = {
-  title: "Dashboard",
-  description: "Dashboard",
+  title: 'Dashboard',
+  description: 'Dashboard',
 };
 
 export default function page() {

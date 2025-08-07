@@ -4,7 +4,7 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
 } from '@/components/atoms/dialog';
 
 interface ModalProps {
@@ -22,7 +22,7 @@ export const Modal: React.FC<ModalProps> = ({
   isOpen,
   onClose,
   children,
-  className
+  className,
 }) => {
   const onChange = (open: boolean) => {
     if (!open) {

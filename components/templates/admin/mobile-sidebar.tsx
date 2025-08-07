@@ -1,9 +1,9 @@
-"use client";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/atoms/sheet";
-import { DashboardNav } from "@/components/organisms/dashboard-nav/DashboardNav";
-import { navItems } from "@/constants/data";
-import { MenuIcon } from "lucide-react";
-import { useState } from "react";
+'use client';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/atoms/sheet';
+import { DashboardNav } from '@/components/organisms/dashboard-nav/DashboardNav';
+import { navItems } from '@/constants/data';
+import { MenuIcon } from 'lucide-react';
+import { useState } from 'react';
 
 // import { Playlist } from "../data/playlists";
 

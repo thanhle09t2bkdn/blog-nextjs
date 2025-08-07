@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,14 +6,14 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/atoms/dropdown-menu";
-import { Button } from "@/components/atoms/button";
-import { useRouter } from "next/navigation";
-import { useUser } from "@/hooks/use-user";
-import { useCurrency } from "@/hooks/use-currency";
-import { cn } from "@/lib/utils";
-import Link from "next/link";
-import { useIsClient } from "@/hooks/use-is-client";
+} from '@/components/atoms/dropdown-menu';
+import { Button } from '@/components/atoms/button';
+import { useRouter } from 'next/navigation';
+import { useUser } from '@/hooks/use-user';
+import { useCurrency } from '@/hooks/use-currency';
+import { cn } from '@/lib/utils';
+import Link from 'next/link';
+import { useIsClient } from '@/hooks/use-is-client';
 
 const MenuAccount = () => {
   const router = useRouter();
@@ -27,14 +27,14 @@ const MenuAccount = () => {
 
   const handleLogout = () => {
     logout();
-    router.push("/");
+    router.push('/');
     router.refresh();
   };
 
   return !isLoggedIn && isClient ? (
     <Button
       className="bg-blue-700 font-medium text-base"
-      onClick={() => handleClick("/login")}
+      onClick={() => handleClick('/login')}
     >
       Login
     </Button>
@@ -42,24 +42,32 @@ const MenuAccount = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Image
-          src={"/assets/icons/customer.svg"}
+          src={'/assets/icons/customer.svg'}
           height={28}
           width={28}
-          alt={"setting"}
+          alt={'setting'}
           className="cursor-pointer hover:scale-110 transition-all duration-300 hover:bg-blue-500 hover:p-1"
         />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56 rounded">
         <DropdownMenuGroup>
           <DropdownMenuItem>
-            <Link className="flex items-center" href="/profile" prefetch={false}>
+            <Link
+              className="flex items-center"
+              href="/profile"
+              prefetch={false}
+            >
               <span>{user?.email}</span>
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Link className="flex items-center" href="/history-orders" prefetch={false}>
+          <Link
+            className="flex items-center"
+            href="/history-orders"
+            prefetch={false}
+          >
             <span>History Orders</span>
           </Link>
         </DropdownMenuItem>
@@ -76,9 +84,9 @@ const MenuAccount = () => {
               <div
                 key={item.code}
                 className={cn(
-                  "cursor-pointer flex items-center justify-center rounded-md px-1",
-                  "hover:bg-blue-500 hover:text-white transition-all duration-300",
-                  currency.code === item.code ? "bg-blue-500 text-white" : ""
+                  'cursor-pointer flex items-center justify-center rounded-md px-1',
+                  'hover:bg-blue-500 hover:text-white transition-all duration-300',
+                  currency.code === item.code ? 'bg-blue-500 text-white' : '',
                 )}
                 onClick={() => setCurrency(item)}
               >

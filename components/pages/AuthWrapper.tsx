@@ -1,15 +1,16 @@
-"use client";
+'use client';
 
-import Loading from "@/app/loading_screen";
-import { httpRequest } from "@/lib/apis/httpRequest";
-import { usePathname, useRouter } from "next/navigation";
-import { useUser } from "@/hooks/use-user";
-import { Role } from "@/types";
-import { ApiUrl } from "@/constants/api-url";
-import { getCookie } from "cookies-next";
-import { useCurrency } from "@/hooks/use-currency";
-import { useEffectOnce } from "@/hooks/use-effect-once";
-import { AppRoutes } from "@/constants/route";
+import Loading from '@/app/loading_screen';
+import { httpRequest } from '@/lib/apis/httpRequest';
+import { usePathname, useRouter } from 'next/navigation';
+import { useUser } from '@/hooks/use-user';
+import { useCurrency } from '@/hooks/use-currency';
+import { useHydration } from '@/hooks/use-hydration';
+import { Role } from '@/types';
+import { ApiUrl } from '@/constants/api-url';
+import { getCookie } from 'cookies-next';
+import { useEffectOnce } from '@/hooks/use-effect-once';
+import { AppRoutes } from '@/constants/route';
 
 interface AuthWrapperProps {
   children: React.ReactNode;
@@ -18,22 +19,25 @@ interface AuthWrapperProps {
 const AuthWrapper: React.FC<AuthWrapperProps> = ({ children }) => {
   const router = useRouter();
   const pathname = usePathname();
+  const isHydrated = useHydration();
   const { isLoggedIn, user, setIsLoggedIn, setUser } = useUser();
   const { currencies, setCurrencies, setCurrency } = useCurrency();
 
   useEffectOnce(() => {
+    if (!isHydrated) return;
+
     const checkLoginStatus = async () => {
       try {
-        const currency = getCookie("currency");
-        if (currency) {
+        const currency = getCookie('currency');
+        if (currency && typeof currency === 'string') {
           setCurrency(JSON.parse(currency));
         }
 
         const isPublicPage = AppRoutes.Public.some((page) =>
-          pathname.includes(page)
+          pathname.includes(page),
         );
-        const isManagePage = pathname.includes("/manage");
-        const hasAccessToken = !!getCookie("accessToken");
+        const isManagePage = pathname.includes('/manage');
+        const hasAccessToken = !!getCookie('accessToken');
 
         if (isPublicPage && !hasAccessToken && !isManagePage) {
           return true;
@@ -41,11 +45,11 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({ children }) => {
 
         if (!hasAccessToken || (!user && isManagePage)) {
           setIsLoggedIn(false);
-          return router.push("/");
+          return router.push('/');
         }
 
         if (user?.role !== Role.Admin && isManagePage) {
-          return router.push("/404");
+          return router.push('/404');
         }
 
         const [userResponse, currenciesResponse] = await Promise.all([
@@ -63,15 +67,15 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({ children }) => {
 
           const isAdmin = user?.role === Role.Admin;
           const isAccessingAdminPage = AppRoutes.Admin.some((page) =>
-            pathname.includes(page)
+            pathname.includes(page),
           );
 
           const redirectPath =
             !isAdmin && isAccessingAdminPage
-              ? "/404"
+              ? '/404'
               : isAdmin && !isAccessingAdminPage
-              ? "/manage/dashboard"
-              : pathname;
+                ? '/manage/dashboard'
+                : pathname;
 
           router.push(redirectPath);
         } else {
@@ -82,8 +86,14 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({ children }) => {
       }
     };
 
-    checkLoginStatus();
+    // Small delay to allow hydration to complete
+    setTimeout(checkLoginStatus, 100);
   });
+
+  // Show loading until client-side hydration is complete
+  if (!isHydrated) {
+    return <Loading />;
+  }
 
   if (
     (!isLoggedIn || !user) &&

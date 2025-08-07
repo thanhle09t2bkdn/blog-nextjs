@@ -1,5 +1,5 @@
-import React from "react";
-import { ScrollArea } from "@/components/atoms/scroll-area";
+import React from 'react';
+import { ScrollArea } from '@/components/atoms/scroll-area';
 
 export default function PageContainer({
   children,

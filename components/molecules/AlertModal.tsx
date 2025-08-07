@@ -1,7 +1,7 @@
-"use client";
-import { useEffect, useState } from "react";
-import { Button } from "@/components/atoms/button";
-import { Modal } from "@/components/atoms/modal";
+'use client';
+import { useEffect, useState } from 'react';
+import { Button } from '@/components/atoms/button';
+import { Modal } from '@/components/atoms/modal';
 
 interface AlertModalProps {
   isOpen: boolean;
@@ -17,8 +17,8 @@ export const AlertModal: React.FC<AlertModalProps> = ({
   onClose,
   onConfirm,
   loading,
-  title = "Are you sure?",
-  description = "This action cannot be undone.",
+  title = 'Are you sure?',
+  description = 'This action cannot be undone.',
 }) => {
   const [isMounted, setIsMounted] = useState(false);
 
