@@ -33,26 +33,10 @@ export const ChangePasswordFormValidation = z.object({
 });
 
 export const SignupFormValidation = z.object({
-  companyName: z
-    .string()
-    .min(2, 'Name must be at least 2 characters')
-    .max(50, 'Name must be at most 50 characters'),
+  firstName: z.string().min(2, 'First Name must be at least 2 characters'),
+  lastName: z.string().min(2, 'Last Name must be at least 2 characters'),
   email: z.string().email('Invalid email address'),
   password: z.string().min(6, 'Password must be at least 6 characters'),
-  address: z
-    .string()
-    .min(5, 'Address must be at least 5 characters')
-    .max(500, 'Address must be at most 500 characters'),
-  city: z.string().min(2, 'City must be at least 2 characters'),
-  state: z.string().min(2, 'State must be at least 2 characters'),
-  zip: z.string().min(2, 'Zip must be at least 2 characters'),
-  country: z.string().min(2, 'Country must be at least 2 characters'),
-  phone: z.string(),
-  contactPerson: z
-    .string()
-    .min(2, 'Name must be at least 2 characters')
-    .max(50, 'Name must be at most 50 characters'),
-  contactEmail: z.string().email('Invalid email address'),
 });
 
 export const ProfileFormValidation = z.object({
