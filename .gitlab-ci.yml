@@ -1,0 +1,15 @@
+stages:
+  - deploy
+
+deploy_stg:
+  stage: deploy
+  tags:
+    - blog-nextjs
+  script:
+    - echo "Deploy to staging environment"
+    - eval $(ssh-agent -s)
+    - echo "$SSH_STG_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - ssh -o StrictHostKeyChecking=no -T "$TARGET_SERVER_USER@$TARGET_SERVER_HOST" "source /root/.nvm/nvm.sh && cd /nextjs-app && git pull && npm install && npm run build && pm2 reload nextjs-app"
+  only:
+    - staging
+    - main
