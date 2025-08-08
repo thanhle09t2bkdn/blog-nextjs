@@ -8,8 +8,7 @@ import { Role } from '@/types';
 import { redirect } from 'next/navigation';
 
 const AdminLayout = async ({ children }: { children: React.ReactNode }) => {
-  const res = await getCurrentUserServer();
-  const user = res?.result;
+  const user = await getCurrentUserServer();
   if (user?.role?.name !== Role.Admin) {
     return redirect('/');
   }

@@ -4,7 +4,6 @@ import Loading from '@/app/loading_screen';
 import { httpRequest } from '@/lib/apis/httpRequest';
 import { usePathname, useRouter } from 'next/navigation';
 import { useUser } from '@/hooks/use-user';
-import { useCurrency } from '@/hooks/use-currency';
 import { useHydration } from '@/hooks/use-hydration';
 import { Role } from '@/types';
 import { ApiUrl } from '@/constants/api-url';
@@ -51,11 +50,11 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({ children }) => {
         ]);
 
         if (userResponse.status === 200) {
-          const user = userResponse.data?.result;
+          const user = userResponse.data;
           setUser(user);
           setIsLoggedIn(true);
-
-          const isAdmin = user?.role === Role.Admin;
+          console.log(userResponse);
+          const isAdmin = user?.role?.name === Role.Admin;
           const isAccessingAdminPage = AppRoutes.Admin.some((page) =>
             pathname.includes(page),
           );

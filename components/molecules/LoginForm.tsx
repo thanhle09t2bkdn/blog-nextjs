@@ -48,7 +48,7 @@ export const LoginForm = () => {
       const [userResponse] = await Promise.all([
         httpRequest.get(ApiUrl.GET_PROFILE),
       ]);
-      setUser(userResponse.data?.result || data?.user);
+      setUser(userResponse.data || data?.user);
 
       if (data?.user?.role.name === Role.Admin) {
         router.refresh();
