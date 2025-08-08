@@ -1,17 +1,15 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-// import { pathnameUrl } from "./constants/pathname";
-// import { getCurrentUserServer } from "./lib/servers/user.actions";
-// import { Role } from "./types";
+import { getCurrentUserServer } from '@/lib/servers/user.actions';
+import { Role } from '@/types/index';
 
 export async function middleware(request: NextRequest) {
-  // const path = request.nextUrl.pathname;
-
-  // const user = await getCurrentUserServer();
-  // if (path.includes("/manage") && user?.role !== Role.Admin) {
-  //   return NextResponse.redirect(new URL("/", request.url));
-  // }
+  const path = request.nextUrl.pathname;
+  console.log(path);
+  const user = await getCurrentUserServer();
+  if (path.includes('/manage') && user?.role?.name !== Role.Admin) {
+    return NextResponse.redirect(new URL('/', request.url));
+  }
 
   return NextResponse.next();
 }

@@ -9,9 +9,7 @@ import { Form } from '@/components/atoms/form';
 import { UserFormValidation } from '@/lib/validation';
 
 import CustomFormField, { FormFieldType } from './CustomFormField';
-import { Mail } from 'lucide-react';
 import SubmitButton from './SubmitButton';
-import { ForgotPasswordForm } from './ForgotPasswordForm';
 import { useRouter } from 'next/navigation';
 import { httpRequest } from '@/lib/apis/httpRequest';
 import { ApiUrl } from '@/constants/api-url';
@@ -25,7 +23,6 @@ export const LoginForm = () => {
   const router = useRouter();
   const toast = useToast();
   const { setUser, setIsLoggedIn, setAccessToken } = useUser();
-  const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof UserFormValidation>>({
@@ -71,15 +68,6 @@ export const LoginForm = () => {
       setIsLoading(false);
     }
   };
-
-  const handleSignUp = () => {
-    router.push('/signup');
-  };
-
-  if (isForgotPassword) {
-    return <ForgotPasswordForm setIsForgotPassword={setIsForgotPassword} />;
-  }
-
   return (
     <div className="flex flex-col flex-1 lg:w-1/2 w-full">
       <div className="w-full max-w-md sm:pt-10 mx-auto mb-5">
@@ -127,7 +115,7 @@ export const LoginForm = () => {
                 />
               </div>
               <Link
-                href="/reset-password"
+                href="/forgot-password"
                 className="text-sm text-brand-500 hover:text-brand-600 dark:text-brand-400"
               >
                 Forgot password?
@@ -139,7 +127,7 @@ export const LoginForm = () => {
             </SubmitButton>
             <div className="mt-5">
               <p className="text-sm font-normal text-center text-gray-700 dark:text-gray-400 sm:text-start">
-                Don&apos;t have an account? {""}
+                Don&apos;t have an account? {''}
                 <Link
                   href="/signup"
                   className="text-brand-500 hover:text-brand-600 dark:text-brand-400"
@@ -149,9 +137,7 @@ export const LoginForm = () => {
               </p>
             </div>
           </form>
-
         </Form>
-
       </div>
     </div>
   );
